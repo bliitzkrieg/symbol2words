@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div class="solution">
+    <div class="btn" *ngFor="let char of stack" tappable (tap)="removeChar(char)">{{char}}</div>
+  </div>
+  
+  <div class="btn-container">
+    <div class="btn" tappable (tap)="doTap('A')">A</div>
+    <div class="btn" tappable (tap)="doTap('B')">B</div>
+    <div class="btn" tappable (tap)="doTap('C')">C</div>
+    <div class="btn" tappable (tap)="doTap('D')">D</div>
+    <div class="btn" tappable (tap)="doTap('E')">E</div>
+  </div>
+  
+</ion-content>

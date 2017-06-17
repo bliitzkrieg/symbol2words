@@ -3,7 +3,6 @@ import { Solution } from "../../app/solutions";
 import { shuffleArray, buildRandomCharacters, MAX_CHARACTERS } from "../../app/utility";
 import { SoundService } from "../../providers/sound-service";
 import { Character } from "../../reducer/answer";
-import { timeout } from "rxjs/operator/timeout";
 
 // Suppresses Array.From TS error
 interface ArrayConstructor {

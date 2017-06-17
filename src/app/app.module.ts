@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { StoreModule } from '@ngrx/store';
+import { Vibration } from '@ionic-native/vibration';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -42,8 +43,9 @@ import { SolutionModule } from "../components/solution/solution.module";
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    SoundService
+    SoundService,
+    Vibration,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

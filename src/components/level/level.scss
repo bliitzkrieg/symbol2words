@@ -1,0 +1,25 @@
+level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 65px;
+  padding: 10px 0 0 0;
+  margin-top: 30px;
+  right: 20px;
+  height: 80px;
+  background: #4bf8b9;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  color: white;
+  font-size: 1.5em;
+  text-align: center;
+  font-family: 'Mogra';
+  z-index: 99999;
+  border: 1px solid #67ff9b;
+  border-top: none;
+
+  .level {
+    font-size: 2em;
+  }
+}

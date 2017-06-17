@@ -1,23 +1,24 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+    <header [level]="levels | async"></header>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
-  <div class="solution">
-    <div class="btn" *ngFor="let char of stack" tappable (tap)="removeChar(char)">{{char}}</div>
-  </div>
-  
-  <div class="btn-container">
-    <div class="btn" tappable (tap)="doTap('A')">A</div>
-    <div class="btn" tappable (tap)="doTap('B')">B</div>
-    <div class="btn" tappable (tap)="doTap('C')">C</div>
-    <div class="btn" tappable (tap)="doTap('D')">D</div>
-    <div class="btn" tappable (tap)="doTap('E')">E</div>
-  </div>
-  
+    <div class="home-container">
+        <div class="solution">
+            <button (click)="doInc()">Inc Level</button>
+        </div>
+        <div class="bottom">
+            <solution
+                    [level]="(levels | async)?.current"
+                    [answer]="(answer | async)?.characters"
+                    (remove)="removeCharacterFromAnswer($event)"></solution>
+
+            <keyboard
+                    [level]="(levels | async)?.current"
+                    [answer]="(answer | async)?.characters"
+                    (add)="addCharacterToAnswer($event)"></keyboard>
+        </div>
+    </div>
+
 </ion-content>

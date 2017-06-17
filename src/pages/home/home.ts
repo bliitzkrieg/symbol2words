@@ -1,31 +1,36 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { Howl } from 'howler';
+import { Solutions } from "../../app/solutions";
+import { Observable } from "rxjs/Rx";
+import { Store } from "@ngrx/store";
+import { INCREMENT_LEVEL } from "../../reducer/levels";
+import { RESET_ANSWER, Character } from "../../reducer/answer";
+import * as fromRoot from '../../reducer';
+import * as answer from '../../actions/answer';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+  public levels: Observable<Solutions>;
+  public answer: Observable<Character[]>;
 
-  private howl = new Howl({
-    src: ['./assets/audio/click.mp3']
-  });
-
-  public stack = [];
-
-  constructor(public navCtrl: NavController) {
-
+  constructor(private store: Store<fromRoot.State>) {
+    this.levels = store.select('levels');
+    this.answer = store.select('answer');
   }
 
-  public doTap(char): void {
-    this.howl.play();
-    this.stack.push(char);
+  public addCharacterToAnswer(character: Character) {
+    this.store.dispatch(new answer.AddCharacterAction(character));
   }
 
-  public removeChar(char): void {
-    this.howl.play();
-    this.stack = this.stack.filter(i => i !== char);
+  public doInc() {
+    this.store.dispatch({ type: INCREMENT_LEVEL });
+    this.store.dispatch({ type: RESET_ANSWER });
+  }
+
+  public removeCharacterFromAnswer(character: Character): void {
+    this.store.dispatch(new answer.RemoveCharacterAction(character));
   }
 
 }

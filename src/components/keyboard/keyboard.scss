@@ -16,19 +16,19 @@ keyboard {
     width: calc(100% * (1 / 6) - 6px);
     margin: 3px;
     padding: 10px 5px 5px;
-    background: linear-gradient(150deg, #ffffff 25%, #f3d60b 100%);
+    background: #ffe619;
     text-align: center;
     text-transform: uppercase;
     font-size: 1.6em;
     font-family: 'Mogra';
-    color: #767616;
+    color: #2f8e30;
 
     transition: all 0.1s ease-in;
     animation-name: example;
     animation-duration: 0.2s;
 
     border-radius: 3px;
-    box-shadow: 2px 2px 0 0 darken(#f3fc6f, 30%);
+    box-shadow: 2px 2px 0 0 darken(#ffe619, 10%);
   }
 
   .btn--active {

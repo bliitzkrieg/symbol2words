@@ -27,6 +27,7 @@
     "@ionic-native/vibration": "^3.12.1",
     "@ionic/storage": "2.0.1",
     "@ngrx/core": "^1.2.0",
+    "@ngrx/effects": "^2.0.3",
     "@ngrx/store": "^2.2.2",
     "@types/howler": "^2.0.2",
     "howler": "^2.0.4",

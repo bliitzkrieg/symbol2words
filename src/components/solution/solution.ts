@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Character } from "../../reducer/answer";
+import { SolutionSlot } from "../../reducer/answer";
 import { SoundService } from "../../providers/sound-service";
 
 @Component({
@@ -7,15 +7,16 @@ import { SoundService } from "../../providers/sound-service";
   templateUrl: 'solution.html'
 })
 export class Solution {
-  @Input() level: Solution;
-  @Input() answer: Character[];
-  @Output() remove = new EventEmitter<Character>();
+  @Input() slots: SolutionSlot[];
+  @Output() remove = new EventEmitter<SolutionSlot>();
 
   constructor(private soundService: SoundService) {}
 
-  public doTap(character: Character): void {
-    this.soundService.playClick();
-    this.remove.emit(character);
+  public isCharacterSpace(character: string): boolean {
+    return character === ' ';
   }
 
+  public removeSlot(slot: SolutionSlot): void {
+    this.remove.emit(slot);
+  }
 }

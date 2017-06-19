@@ -1,15 +1,15 @@
-export interface Solutions {
-    [level: number]: Solution
+export interface Levels {
+    [level: number]: Level
 }
 
-export interface Solution {
+export interface Level {
     level: number;
     question: string;
     answer: string;
     reward: number;
 }
 
-const levels: Solutions = {
+const levels: Levels = {
     1: {
         level: 1,
         question: 'hi five',
@@ -18,8 +18,8 @@ const levels: Solutions = {
     },
     2: {
         level: 2,
-        question: 'hi five',
-        answer: 'hi five',
+        question: 'you rock',
+        answer: 'you rock',
         reward: 25
     }
 };

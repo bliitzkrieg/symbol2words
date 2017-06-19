@@ -1,29 +1,48 @@
 import { Action } from '@ngrx/store';
-import levels from "../app/solutions";
-import { Solution } from "../app/solutions";
-import { Solutions } from "../app/solutions";
+import levels from "../app/levels";
+import { Level, Levels } from "../app/levels";
+import { Character } from "./answer";
+import { convertStringToArray, MAX_CHARACTERS, buildRandomCharacters, shuffleArray } from "../app/utility";
+import * as LevelsActions from '../actions/levels';
 
 export interface LevelState {
-    levels: Solutions,
-    current: Solution
+    levels: Levels,
+    current: Level,
+    keyboard: Character[]
 }
 
 export const INCREMENT_LEVEL = 'INCREMENT_LEVEL';
 export const DECREMENT_LEVEL = 'DECREMENT_LEVEL';
 export const RESET = 'RESET';
 
-const defaultState: LevelState = {
-    levels,
-    current: levels[1]
+const buildKeyboard = (answer: string) => {
+    const characters = convertStringToArray(answer)
+        .filter(char => char != ' ');
+    const extras = buildRandomCharacters(MAX_CHARACTERS - characters.length);
+
+    return shuffleArray([...characters, ...convertStringToArray(extras)]).map((letter, index) => {
+        return {
+            letter,
+            id: index
+        };
+    });
 };
 
-export function levelReducer(state = defaultState, action: Action) {
+const defaultState: LevelState = {
+    levels,
+    current: levels[1],
+    keyboard: buildKeyboard(levels[1].answer)
+};
+
+export function levelReducer(state = defaultState, action: LevelsActions.Actions) {
     switch (action.type) {
         case INCREMENT_LEVEL:
             const level: number = (state.current.level + 1);
+            const current = state.levels[level] ? state.levels[level] : state.levels[state.current.level];
             return {
                 ...state,
-                current: state.levels[level] ? state.levels[level] : state.levels[state.current.level]
+                current,
+                keyboard: buildKeyboard(current.answer)
              };
         default:
             return state;

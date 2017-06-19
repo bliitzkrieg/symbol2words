@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { Level } from './level';
+import { LevelBadge } from './level-badge';
 
 @NgModule({
   declarations: [
-    Level,
+    LevelBadge,
   ],
   imports: [
-    IonicPageModule.forChild(Level),
+    IonicPageModule.forChild(LevelBadge),
   ],
   exports: [
-    Level
+    LevelBadge
   ]
 })
-export class LevelModule {}
+export class LevelBadgeModule {}

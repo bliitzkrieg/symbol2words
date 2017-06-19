@@ -1,23 +1,22 @@
 <ion-header>
-    <header [level]="levels | async"></header>
+    <header [level]="levels | async" [user]="user | async"></header>
 </ion-header>
 
 <ion-content>
 
     <div class="home-container">
         <div class="solution">
-            <button (click)="doInc()">Inc Level</button>
+            Stuff & Things
         </div>
         <div class="bottom">
             <solution
-                    [level]="(levels | async)?.current"
-                    [answer]="(answer | async)?.characters"
+                    [slots]="(answer | async)?.slots"
                     (remove)="removeCharacterFromAnswer($event)"></solution>
 
             <keyboard
-                    [level]="(levels | async)?.current"
-                    [answer]="(answer | async)?.characters"
-                    (add)="addCharacterToAnswer($event)"></keyboard>
+                    [keyboard]="(levels | async)?.keyboard"
+                    [slots]="(answer | async)?.slots"
+                    (add)="onClickAdd$.next($event)"></keyboard>
         </div>
     </div>
 

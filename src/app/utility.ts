@@ -1,3 +1,8 @@
+// Suppresses Array.From TS error
+interface ArrayConstructor {
+    from(arrayLike: any, mapFn?, thisArg?): Array<any>;
+}
+
 export const MAX_CHARACTERS = 12;
 
 export function shuffleArray(array: any[] = []): any[] {
@@ -19,4 +24,8 @@ export function buildRandomCharacters(length: number): string {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
+}
+
+export function convertStringToArray(value: string): string[] {
+    return Array.from(value);
 }

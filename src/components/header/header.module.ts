@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { Header } from './header';
-import { LevelModule } from "../level/level.module";
+import { LevelBadgeModule } from "../level-badge/level-badge.module";
 
 @NgModule({
   declarations: [
@@ -9,7 +9,7 @@ import { LevelModule } from "../level/level.module";
   ],
   imports: [
     IonicPageModule.forChild(Header),
-    LevelModule
+    LevelBadgeModule
   ],
   exports: [
     Header

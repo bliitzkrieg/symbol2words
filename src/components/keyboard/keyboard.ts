@@ -1,53 +1,25 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Solution } from "../../app/solutions";
-import { shuffleArray, buildRandomCharacters, MAX_CHARACTERS } from "../../app/utility";
-import { SoundService } from "../../providers/sound-service";
-import { Character } from "../../reducer/answer";
+import { Character, SolutionSlot } from "../../reducer/answer";
 
-// Suppresses Array.From TS error
-interface ArrayConstructor {
-  from(arrayLike: any, mapFn?, thisArg?): Array<any>;
-}
 
 @Component({
   selector: 'keyboard',
   templateUrl: 'keyboard.html'
 })
 export class Keyboard {
-  @Input() level: Solution;
-  @Input() answer: Character[];
-  @Output() add = new EventEmitter<Character>();
+  @Input() keyboard: Character[];
+  @Input() slots: SolutionSlot[];
+  @Output() add = new EventEmitter<{ character: Character }>();
 
-  public characters: Character[];
-
-  constructor(private soundService: SoundService) {
-  }
-
-  public ngOnChanges(changes: any) {
-    if (!changes.level) {
-      return;
-    }
-
-    const characters = Array.from(changes.level.currentValue.answer)
-        .filter(char => char != ' ');
-    const extras = buildRandomCharacters(MAX_CHARACTERS - characters.length);
-
-    this.characters = shuffleArray([...characters, ...Array.from(extras)]).map((char, index) => {
-      return {
-        letter: char,
-        id: index
-      };
-    });
-  }
+  constructor() {}
 
   public isCharacterActive(character: Character): boolean {
-    return this.answer ? this.answer.filter(item => item.id === character.id).length > 0 : false;
+    return this.slots ? this.slots.filter(item => item.entered && item.entered.id === character.id).length > 0 : false;
   }
 
   public doTap(character: Character): void {
-    this.soundService.playClick();
     setTimeout(() => {
-      this.add.emit(character);
+      this.add.emit({ character });
     }, 40);
   }
 

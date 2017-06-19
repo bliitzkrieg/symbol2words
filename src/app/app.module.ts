@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { StoreModule } from '@ngrx/store';
 import { Vibration } from '@ionic-native/vibration';
+import { EffectsModule } from '@ngrx/effects';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -15,6 +16,9 @@ import { SoundService } from "../providers/sound-service";
 import { answerReducer } from "../reducer/answer";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { SolutionModule } from "../components/solution/solution.module";
+import { userReducer } from "../reducer/user";
+import { WonModalPageModule } from "../pages/won-modal/won-modal.module";
+import { WonEffects } from "../effects/won";
 
 @NgModule({
   declarations: [
@@ -25,7 +29,8 @@ import { SolutionModule } from "../components/solution/solution.module";
     BrowserModule,
     StoreModule.provideStore({
       answer: answerReducer,
-      levels: levelReducer
+      levels: levelReducer,
+      user: userReducer
     }),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 5
@@ -33,7 +38,9 @@ import { SolutionModule } from "../components/solution/solution.module";
     IonicModule.forRoot(MyApp),
     HeaderModule,
     KeyboardModule,
-    SolutionModule
+    SolutionModule,
+    WonModalPageModule,
+    EffectsModule.run(WonEffects)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

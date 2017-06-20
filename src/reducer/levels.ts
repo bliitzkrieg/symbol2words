@@ -1,4 +1,3 @@
-import { Action } from '@ngrx/store';
 import levels from "../app/levels";
 import { Level, Levels } from "../app/levels";
 import { Character } from "./answer";
@@ -12,8 +11,7 @@ export interface LevelState {
 }
 
 export const INCREMENT_LEVEL = 'INCREMENT_LEVEL';
-export const DECREMENT_LEVEL = 'DECREMENT_LEVEL';
-export const RESET = 'RESET';
+export const SHUFFLE_KEYBOARD = 'SHUFFLE_KEYBOARD';
 
 const buildKeyboard = (answer: string) => {
     const characters = convertStringToArray(answer)
@@ -44,6 +42,11 @@ export function levelReducer(state = defaultState, action: LevelsActions.Actions
                 current,
                 keyboard: buildKeyboard(current.answer)
              };
+        case SHUFFLE_KEYBOARD:
+            return {
+                ...state,
+                keyboard: shuffleArray(state.keyboard)
+            };
         default:
             return state;
     }

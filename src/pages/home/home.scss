@@ -13,6 +13,18 @@ page-home {
     display: flex;
     justify-content:center;
     align-items:center;
+    background: url('../../assets/images/bg.png') repeat;
+    position: relative;
+  }
+
+  .game-actions {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+
+    .button {
+      color: white;
+    }
   }
 
 }

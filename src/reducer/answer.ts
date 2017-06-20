@@ -78,7 +78,10 @@ export function answerReducer(state = defaultState, action: Answer.Actions) {
                         .map((item, index) => { return { id: index, letter: item, entered: undefined }})
             };
         case RESET_ANSWER:
-            return defaultState;
+            return {
+                ...state,
+                slots: state.slots.map(slot => { return {...slot, entered: undefined }})
+            };
         default:
             return state;
     }

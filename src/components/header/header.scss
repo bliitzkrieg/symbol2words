@@ -5,4 +5,27 @@ header {
   align-items: center;
   padding: 0 15px;
   color: #fff;
+
+  .header-settings {
+    color: white;
+    background: #4bf8b9;
+  }
+
+  .coin-container {
+    font-size: 1.5em;
+    font-family: $main-font;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i {
+      color: #fff900;
+    }
+  }
+
+  .coin-count {
+    font-size: 1.3em;
+    padding-top: 6px;
+    margin-left: 5px;
+  }
 }

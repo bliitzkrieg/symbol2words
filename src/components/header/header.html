@@ -1,3 +1,10 @@
-<div>Settings</div>
-<div>Coins: {{ user.coins }}</div>
+<button ion-button icon-only class="header-settings">
+    <ion-icon name="settings"></ion-icon>
+</button>
+<div class="coin-container">
+    <i class="fa fa-diamond" aria-hidden="true"></i>
+    <div class="coin-count">
+        {{ user.coins }}
+    </div>
+</div>
 <level-badge [value]="level"></level-badge>

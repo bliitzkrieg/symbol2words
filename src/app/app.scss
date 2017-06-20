@@ -16,8 +16,10 @@
 // automatically applied to the <body> element in the app.
 
 @font-face {
-  font-family: 'Mogra';
+  font-family: $main-font;
   src:
           local('Mogra-Regular'),
           url('../assets/fonts/Mogra-Regular.ttf');
 }
+
+@import "../assets/fonts/font-awesome/scss/font-awesome";

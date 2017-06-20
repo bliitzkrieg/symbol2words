@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { SolutionSlot } from "../../reducer/answer";
-import { SoundService } from "../../providers/sound-service";
 
 @Component({
   selector: 'solution',
@@ -8,9 +7,10 @@ import { SoundService } from "../../providers/sound-service";
 })
 export class Solution {
   @Input() slots: SolutionSlot[];
+  @Input() isFull: boolean;
   @Output() remove = new EventEmitter<SolutionSlot>();
 
-  constructor(private soundService: SoundService) {}
+  constructor() {}
 
   public isCharacterSpace(character: string): boolean {
     return character === ' ';

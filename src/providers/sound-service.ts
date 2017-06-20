@@ -5,19 +5,23 @@ import { Vibration } from '@ionic-native/vibration';
 @Injectable()
 export class SoundService {
 
-  private howl = new Howl({
-    src: ['./assets/audio/click.mp3']
+  private click = new Howl({
+    src: ['./assets/audio/Multi_wav/UI_multi_16.wav']
+  });
+
+  private error = new Howl({
+    src: ['./assets/audio/Multi_wav/UI_multi_24.wav']
   });
 
   constructor(private vibration: Vibration) {}
 
   public playClick(): void {
-    this.howl.play();
+    this.click.play();
     this.vibration.vibrate(50);
   }
 
   public playError(): void {
-    this.howl.play();
+    this.error.play();
     this.vibration.vibrate(50);
   }
 

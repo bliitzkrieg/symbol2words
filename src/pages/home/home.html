@@ -7,10 +7,19 @@
     <div class="home-container">
         <div class="solution">
             Stuff & Things
+            <div class="game-actions">
+                <button ion-button icon-only (click)="resetSolution()">
+                    <ion-icon name="refresh"></ion-icon>
+                </button>
+                <button ion-button icon-only (click)="shuffleKeyboard()">
+                    <ion-icon name="shuffle"></ion-icon>
+                </button>
+            </div>
         </div>
         <div class="bottom">
             <solution
                     [slots]="(answer | async)?.slots"
+                    [isFull]="(answer | async)?.isFull"
                     (remove)="removeCharacterFromAnswer($event)"></solution>
 
             <keyboard

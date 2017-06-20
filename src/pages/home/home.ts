@@ -6,6 +6,7 @@ import { Character, SolutionSlot } from "../../reducer/answer";
 import * as fromRoot from '../../reducer';
 import * as answer from '../../actions/answer';
 import * as user from '../../actions/user';
+import * as levelActions from '../../actions/levels';
 import { SoundService } from "../../providers/sound-service";
 import { Level } from "../../app/levels";
 import { UserState } from "../../reducer/user";
@@ -50,6 +51,16 @@ export class HomePage {
         this.store.dispatch(new answer.RemoveCharacterAction(slot));
     }
 
+    public resetSolution(): void {
+        this.soundService.playClick();
+        this.store.dispatch(new answer.ResetAnswerAction());
+    }
+
+    public shuffleKeyboard(): void {
+        this.soundService.playClick();
+        this.store.dispatch(new levelActions.ShuffleKeyboardAction());
+    }
+
     private TooManyCharacters(): void {
         this.soundService.playError();
         this.store.dispatch(new answer.TooManyCharacters())
@@ -70,6 +81,8 @@ export class HomePage {
                 this.store.dispatch(new ResetAnswerAction());
                 this.store.dispatch(new IncrementLevelAction());
             }, 1000);
+        } else {
+            this.TooManyCharacters();
         }
     }
 

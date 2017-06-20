@@ -1,5 +1,6 @@
 <div *ngFor="let character of keyboard"
      class="btn"
+     ion-button
      tappable
      [class.btn--active]="isCharacterActive(character)"
      (tap)="doTap(character)">{{ character.letter }}</div>

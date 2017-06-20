@@ -14,7 +14,7 @@ export class Keyboard {
   constructor() {}
 
   public isCharacterActive(character: Character): boolean {
-    return this.slots ? this.slots.filter(item => item.entered && item.entered.id === character.id).length > 0 : false;
+    return this.slots ? this.slots.filter(slot => slot.entered && slot.entered.id === character.id).length > 0 : false;
   }
 
   public doTap(character: Character): void {

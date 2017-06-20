@@ -8,7 +8,7 @@ export class IncrementLevelAction implements Action {
 export class ShuffleKeyboardAction implements Action {
     readonly type = SHUFFLE_KEYBOARD;
 }
-  
+
 export type Actions =
     IncrementLevelAction |
     ShuffleKeyboardAction;

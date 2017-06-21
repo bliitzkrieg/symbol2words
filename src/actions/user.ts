@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { USER_WON, TOGGLE_MUTE } from "../reducer/user";
+import { USER_WON, TOGGLE_MUTE, OPEN_SETTINGS, OPEN_HINTS } from "../reducer/user";
 import { Level } from "../app/levels";
 
 export class UserWonAction implements Action {
@@ -12,6 +12,16 @@ export class ToggleMuteAction implements Action {
     readonly type = TOGGLE_MUTE;
 }
 
+export class OpenSettingsAction implements Action {
+    readonly type = OPEN_SETTINGS;
+}
+
+export class OpenHintsAction implements Action {
+    readonly type = OPEN_HINTS;
+}
+
 export type Actions =
     UserWonAction |
-    ToggleMuteAction;
+    ToggleMuteAction |
+    OpenSettingsAction |
+    OpenHintsAction;

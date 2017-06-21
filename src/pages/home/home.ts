@@ -13,6 +13,8 @@ import { IncrementLevelAction } from "../../actions/levels";
 import { ResetAnswerAction } from "../../actions/answer";
 import { CreateSlots } from "../../actions/answer";
 import { PlayClickAction, PlayErrorAction } from "../../actions/sounds";
+import { OpenHintsAction } from "../../actions/user";
+import { OpenSettingsAction } from "../../actions/user";
 
 @Component({
     selector: 'page-home',
@@ -50,6 +52,13 @@ export class HomePage {
     public removeCharacterFromAnswer(slot: SolutionSlot): void {
         this.store.dispatch(new PlayClickAction());
         this.store.dispatch(new answer.RemoveCharacterAction(slot));
+    }
+
+    public openHints(): void {
+        this.store.dispatch(new OpenHintsAction());
+    }
+    public openSettings(): void {
+        this.store.dispatch(new OpenSettingsAction());
     }
 
     public resetSolution(): void {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Level } from "../../app/levels";
 import { UserState } from "../../reducer/user";
 
@@ -9,6 +9,7 @@ import { UserState } from "../../reducer/user";
 export class Header {
   @Input() level: Level;
   @Input() user: UserState;
+  @Output() settings = new EventEmitter<any>();
 
   constructor() {}
 

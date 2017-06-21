@@ -7,6 +7,8 @@ export interface UserState {
 
 export const USER_WON = 'USER_WON';
 export const TOGGLE_MUTE = 'TOGGLE_MUTE';
+export const OPEN_HINTS = 'OPEN_HINTS';
+export const OPEN_SETTINGS = 'OPEN_SETTINGS';
 
 const defaultState: UserState = {
     coins: 100,
@@ -25,6 +27,10 @@ export function userReducer(state = defaultState, action: User.Actions) {
                 ...state,
                 isMuted: !state.isMuted
             };
+        case OPEN_HINTS:
+            return state;
+        case OPEN_SETTINGS:
+            return state;
         default:
             return state;
     }

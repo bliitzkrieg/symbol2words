@@ -7,11 +7,12 @@ import * as fromRoot from '../../reducer';
 import * as answer from '../../actions/answer';
 import * as user from '../../actions/user';
 import * as levelActions from '../../actions/levels';
-import { SoundService } from "../../providers/sound-service";
 import { Level } from "../../app/levels";
 import { UserState } from "../../reducer/user";
 import { IncrementLevelAction } from "../../actions/levels";
 import { ResetAnswerAction } from "../../actions/answer";
+import { CreateSlots } from "../../actions/answer";
+import { PlayClickAction, PlayErrorAction } from "../../actions/sounds";
 
 @Component({
     selector: 'page-home',
@@ -23,7 +24,7 @@ export class HomePage {
     public user: Observable<UserState>;
     public onClickAdd$ = new Subject<any>();
 
-    constructor(private store: Store<fromRoot.State>, private soundService: SoundService) {
+    constructor(private store: Store<fromRoot.State>)  {
         this.levels = store.select('levels');
         this.answer = store.select('answer');
         this.user = store.select('user');
@@ -42,32 +43,32 @@ export class HomePage {
             });
 
         this.levels.subscribe((state: LevelState) => {
-            this.store.dispatch(new answer.CreateSlots(state.current.answer));
-        });
+            this.store.dispatch(new CreateSlots(state.current.answer));
+        }).unsubscribe();
     }
 
     public removeCharacterFromAnswer(slot: SolutionSlot): void {
-        this.soundService.playClick();
+        this.store.dispatch(new PlayClickAction());
         this.store.dispatch(new answer.RemoveCharacterAction(slot));
     }
 
     public resetSolution(): void {
-        this.soundService.playClick();
+        this.store.dispatch(new PlayClickAction());
         this.store.dispatch(new answer.ResetAnswerAction());
     }
 
     public shuffleKeyboard(): void {
-        this.soundService.playClick();
+        this.store.dispatch(new PlayClickAction());
         this.store.dispatch(new levelActions.ShuffleKeyboardAction());
     }
 
     private TooManyCharacters(): void {
-        this.soundService.playError();
+        this.store.dispatch(new PlayErrorAction());
         this.store.dispatch(new answer.TooManyCharacters())
     }
 
     private addCharacter(character: Character): void {
-        this.soundService.playClick();
+        this.store.dispatch(new PlayClickAction());
         this.store.dispatch(new answer.AddCharacterAction(character));
     }
 
@@ -80,6 +81,10 @@ export class HomePage {
             setTimeout(() => {
                 this.store.dispatch(new ResetAnswerAction());
                 this.store.dispatch(new IncrementLevelAction());
+
+                this.levels.subscribe((state: LevelState) => {
+                    this.store.dispatch(new CreateSlots(state.current.answer));
+                }).unsubscribe();
             }, 1000);
         } else {
             this.TooManyCharacters();

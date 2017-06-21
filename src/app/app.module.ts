@@ -12,13 +12,13 @@ import { HomePage } from '../pages/home/home';
 import { HeaderModule } from "../components/header/header.module";
 import { levelReducer } from "../reducer/levels";
 import { KeyboardModule } from "../components/keyboard/keyboard.module";
-import { SoundService } from "../providers/sound-service";
 import { answerReducer } from "../reducer/answer";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { SolutionModule } from "../components/solution/solution.module";
 import { userReducer } from "../reducer/user";
 import { WonModalPageModule } from "../pages/won-modal/won-modal.module";
 import { WonEffects } from "../effects/won";
+import { SoundEffects } from "../effects/sounds";
 
 @NgModule({
   declarations: [
@@ -40,7 +40,8 @@ import { WonEffects } from "../effects/won";
     KeyboardModule,
     SolutionModule,
     WonModalPageModule,
-    EffectsModule.run(WonEffects)
+    EffectsModule.run(WonEffects),
+    EffectsModule.run(SoundEffects)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -50,7 +51,6 @@ import { WonEffects } from "../effects/won";
   providers: [
     StatusBar,
     SplashScreen,
-    SoundService,
     Vibration,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

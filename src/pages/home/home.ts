@@ -12,7 +12,7 @@ import { UserState } from "../../reducer/user";
 import { IncrementLevelAction } from "../../actions/levels";
 import { ResetAnswerAction } from "../../actions/answer";
 import { CreateSlots } from "../../actions/answer";
-import { PlayClickAction, PlayErrorAction } from "../../actions/sounds";
+import { PlayClickAction, PlayErrorAction, PlayMenuAction } from "../../actions/sounds";
 import { OpenHintsAction } from "../../actions/user";
 import { OpenSettingsAction } from "../../actions/user";
 
@@ -55,19 +55,21 @@ export class HomePage {
     }
 
     public openHints(): void {
+        this.store.dispatch(new PlayMenuAction());
         this.store.dispatch(new OpenHintsAction());
     }
     public openSettings(): void {
+        this.store.dispatch(new PlayMenuAction());
         this.store.dispatch(new OpenSettingsAction());
     }
 
     public resetSolution(): void {
-        this.store.dispatch(new PlayClickAction());
+        this.store.dispatch(new PlayMenuAction());
         this.store.dispatch(new answer.ResetAnswerAction());
     }
 
     public shuffleKeyboard(): void {
-        this.store.dispatch(new PlayClickAction());
+        this.store.dispatch(new PlayMenuAction());
         this.store.dispatch(new levelActions.ShuffleKeyboardAction());
     }
 

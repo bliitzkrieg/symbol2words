@@ -8,14 +8,13 @@
         <div class="solution">
             Stuff & Things
             <div class="game-actions">
-                <button ion-button icon-only (click)="resetSolution()">
+                <button ion-button icon-only tappable (tap)="resetSolution()">
                     <ion-icon name="refresh"></ion-icon>
                 </button>
-                <button ion-button icon-only (click)="shuffleKeyboard()">
+                <button ion-button icon-only tappable (tap)="shuffleKeyboard()">
                     <ion-icon name="shuffle"></ion-icon>
                 </button>
-
-                <button ion-button icon-only float-right (click)="openHints()">
+                <button ion-button icon-only float-right tappable (tap)="openHints()">
                     <ion-icon name="help"></ion-icon>
                 </button>
             </div>

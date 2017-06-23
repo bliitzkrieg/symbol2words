@@ -19,6 +19,9 @@ import { userReducer } from "../reducer/user";
 import { WonModalPageModule } from "../pages/won-modal/won-modal.module";
 import { WonEffects } from "../effects/won";
 import { SoundEffects } from "../effects/sounds";
+import { ModalEffects } from "../effects/modal";
+import { SettingsModalPageModule } from "../pages/settings-modal/settings-modal.module";
+import { HintModalPageModule } from "../pages/hint-modal/hint-modal.module";
 
 @NgModule({
   declarations: [
@@ -39,9 +42,15 @@ import { SoundEffects } from "../effects/sounds";
     HeaderModule,
     KeyboardModule,
     SolutionModule,
+
+    //Todo: Move modals to modal module
     WonModalPageModule,
+    SettingsModalPageModule,
+    HintModalPageModule,
+    // Todo: Move effects to effect module
     EffectsModule.run(WonEffects),
-    EffectsModule.run(SoundEffects)
+    EffectsModule.run(SoundEffects),
+    EffectsModule.run(ModalEffects)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

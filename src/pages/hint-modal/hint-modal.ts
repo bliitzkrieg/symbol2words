@@ -1,24 +1,16 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, Renderer2 } from '@angular/core';
+import { IonicPage, ViewController } from 'ionic-angular';
+import { CustomModal } from "../../misc/custom-modal";
 
-/**
- * Generated class for the HintModalPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-hint-modal',
   templateUrl: 'hint-modal.html',
 })
-export class HintModalPage {
+export class HintModalPage extends CustomModal {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public renderer: Renderer2,
+              public viewCtrl: ViewController) {
+      super(renderer, viewCtrl);
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HintModalPage');
-  }
-
 }

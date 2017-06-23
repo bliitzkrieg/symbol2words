@@ -1,24 +1,17 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, Renderer2 } from '@angular/core';
+import { IonicPage, ViewController } from 'ionic-angular';
+import { CustomModal } from "../../misc/custom-modal";
 
-/**
- * Generated class for the SettingsModalPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
-  selector: 'page-settings-modal',
-  templateUrl: 'settings-modal.html',
+    selector: 'page-settings-modal',
+    templateUrl: 'settings-modal.html',
 })
-export class SettingsModalPage {
+export class SettingsModalPage extends CustomModal {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingsModalPage');
-  }
+    constructor(public renderer: Renderer2,
+                public viewCtrl: ViewController) {
+        super(renderer, viewCtrl);
+    }
 
 }

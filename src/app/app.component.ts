@@ -10,7 +10,7 @@ import { CustomModalPopOutAnimation } from "../animations/CustomModalPopOutAnima
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage: any = HomePage;
 
   constructor(private platform: Platform,
               private statusBar: StatusBar,

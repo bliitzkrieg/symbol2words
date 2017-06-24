@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/observable/empty';
 import { Vibration } from "@ionic-native/vibration";
 import * as fromRoot from '../reducer';
-import { PLAY_CLICK, PLAY_ERROR, PLAY_MENU } from "../reducer/sounds";
+import { PLAY_CLICK, PLAY_ERROR, PLAY_MENU, PLAY_PURCHASE } from "../reducer/sounds";
 import { Howl } from 'howler';
 
 @Injectable()
@@ -27,7 +27,7 @@ export class SoundEffects {
 
     @Effect()
     sounds$: Observable<Action> = this.actions$
-        .ofType(PLAY_CLICK, PLAY_ERROR, PLAY_MENU)
+        .ofType(PLAY_CLICK, PLAY_ERROR, PLAY_MENU, PLAY_PURCHASE)
         .withLatestFrom(this.store.select(state => state.user))
         .switchMap(([action, user]) => {
             if (user.isMuted) return empty();
@@ -43,9 +43,13 @@ export class SoundEffects {
                 case PLAY_MENU:
                     this.menu.play();
                     break;
+                case PLAY_PURCHASE:
+
+                    break;
                 default:
                     return empty();
             }
+
             return empty();
         });
 }

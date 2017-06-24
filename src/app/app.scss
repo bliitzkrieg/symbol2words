@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/v2/theming/
 
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -17,9 +16,8 @@
 
 @font-face {
   font-family: $main-font;
-  src:
-          local('Mogra-Regular'),
-          url('../assets/fonts/Mogra-Regular.ttf');
+  src: local('Mogra-Regular'),
+  url('../assets/fonts/Mogra-Regular.ttf');
 }
 
 @import "../assets/fonts/font-awesome/scss/font-awesome";
@@ -28,11 +26,11 @@
   ion-content {
     &.content {
       div.scroll-content {
-        top: 10%;
+        top: 30%;
         left: 10%;
         width: 80%;
-        height: 80%;
-        overflow:hidden;
+        height: 40%;
+        overflow: hidden;
       }
     }
 
@@ -57,4 +55,39 @@
       }
     }
   }
+
+  .scroll-content {
+    padding: 0 !important;
+  }
+
+  .modal-header {
+    height: 50px;
+    background: $primary;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    letter-spacing: 1.5px;
+  }
+
+  .item-md {
+    background: #fafafa;
+  }
+
+  .list-header-md {
+    margin-bottom: 0;
+  }
+
+  ion-icon {
+    color: $primary;
+  }
+
+  .close-button {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+  }
+
 }

@@ -1,3 +1,42 @@
 <ion-content padding>
+    <div class="modal-header">Hints</div>
 
+    <ion-list no-border>
+
+        <ion-item tappable (tap)="removeLetter(user)">
+            <ion-label>
+                Remove a letter
+            </ion-label>
+            <ion-icon name='trash' item-start></ion-icon>
+            <ion-note item-end [class.ion-note-insufficient-diamonds]="!userHasFunds(cost.remove, user)">
+                <i class="fa fa-diamond" aria-hidden="true"></i>
+                {{ cost.remove }}
+            </ion-note>
+        </ion-item>
+
+        <ion-item tappable (tap)="revealLetter(user)">
+            <ion-label>
+                Reveal Letter
+            </ion-label>
+            <ion-icon name='search' item-start></ion-icon>
+            <ion-note item-end [class.ion-note-insufficient-diamonds]="!userHasFunds(cost.reveal, user)">
+                <i class="fa fa-diamond" aria-hidden="true"></i>
+                {{ cost.reveal }}
+            </ion-note>
+        </ion-item>
+
+        <ion-item tappable (tap)="skipLevel(user)">
+            <ion-label>
+                Skip Level
+            </ion-label>
+            <ion-icon name='fastforward' item-start></ion-icon>
+            <ion-note item-end [class.ion-note-insufficient-diamonds]="!userHasFunds(cost.skip, user)">
+                <i class="fa fa-diamond" aria-hidden="true"></i>
+                {{ cost.skip }}
+            </ion-note>
+        </ion-item>
+
+    </ion-list>
+
+    <button class="close-button" ion-button float-right margin-right margin-top tappable (tap)="dismiss()">Back</button>
 </ion-content>

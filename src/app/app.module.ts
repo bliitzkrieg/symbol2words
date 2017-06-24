@@ -22,6 +22,8 @@ import { SoundEffects } from "../effects/sounds";
 import { ModalEffects } from "../effects/modal";
 import { SettingsModalPageModule } from "../pages/settings-modal/settings-modal.module";
 import { HintModalPageModule } from "../pages/hint-modal/hint-modal.module";
+import { EmailEffects } from "../effects/email";
+import { InAppBrowser } from "@ionic-native/in-app-browser";
 
 @NgModule({
   declarations: [
@@ -47,10 +49,12 @@ import { HintModalPageModule } from "../pages/hint-modal/hint-modal.module";
     WonModalPageModule,
     SettingsModalPageModule,
     HintModalPageModule,
+
     // Todo: Move effects to effect module
     EffectsModule.run(WonEffects),
     EffectsModule.run(SoundEffects),
-    EffectsModule.run(ModalEffects)
+    EffectsModule.run(ModalEffects),
+    EffectsModule.run(EmailEffects)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -61,6 +65,7 @@ import { HintModalPageModule } from "../pages/hint-modal/hint-modal.module";
     StatusBar,
     SplashScreen,
     Vibration,
+    InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

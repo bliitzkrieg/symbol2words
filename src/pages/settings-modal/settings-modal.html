@@ -1,3 +1,33 @@
 <ion-content padding>
 
+    <div class="modal-header">
+        Settings
+    </div>
+
+    <ion-list no-border>
+
+        <ion-item>
+            <ion-toggle [checked]="!(user | async)?.isMuted" (ionChange)="toggleMute()"></ion-toggle>
+            <ion-label>
+                Sound
+            </ion-label>
+            <ion-icon name='volume-mute' item-start></ion-icon>
+        </ion-item>
+
+        <ion-item tappable (tap)="resetGame()">
+            <ion-label>
+                Reset Game
+            </ion-label>
+            <ion-icon name='refresh' item-start></ion-icon>
+        </ion-item>
+
+        <ion-item tappable (tap)="email()">
+            <ion-icon name='mail' item-start></ion-icon>
+            Bug or Need Help?
+        </ion-item>
+
+    </ion-list>
+
+    <button class="close-button" ion-button float-right margin-right margin-top tappable (tap)="dismiss()">Back</button>
+
 </ion-content>

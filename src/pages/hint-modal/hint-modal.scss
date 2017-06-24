@@ -1,3 +1,11 @@
 page-hint-modal {
+  ion-note {
+    color: $primary !important;
+    font-family: $main-font;
+    font-size: 1.2em;
+  }
 
+  .ion-note-insufficient-diamonds {
+    color: #ff5a2e !important;
+  }
 }

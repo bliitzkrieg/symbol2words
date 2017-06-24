@@ -9,6 +9,9 @@ export const USER_WON = 'USER_WON';
 export const TOGGLE_MUTE = 'TOGGLE_MUTE';
 export const OPEN_HINTS = 'OPEN_HINTS';
 export const OPEN_SETTINGS = 'OPEN_SETTINGS';
+export const RESET_GAME_PROMPT = 'RESET_GAME_PROMPT';
+export const EMAIL_SUPPORT = 'EMAIL_SUPPORT';
+export const USER_PURCHASE = 'USER_PURCHASE';
 
 const defaultState: UserState = {
     coins: 100,
@@ -26,6 +29,11 @@ export function userReducer(state = defaultState, action: User.Actions) {
             return {
                 ...state,
                 isMuted: !state.isMuted
+            };
+        case USER_PURCHASE:
+            return {
+                ...state,
+                coins: state.coins - action.payload
             };
         case OPEN_HINTS:
             return state;

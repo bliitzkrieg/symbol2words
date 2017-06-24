@@ -7,7 +7,9 @@ import { UserState } from "../../reducer/user";
 import { Observable } from "rxjs/Rx";
 import * as fromRoot from '../../reducer';
 import { UserWonAction, PurchaseAction } from "../../actions/user";
-import { LevelState } from "../../reducer/levels";
+import { LevelState, getVisibleKeys } from "../../reducer/levels";
+import { HideCharacterAction } from "../../actions/levels";
+import { ResetAnswerAction } from "../../actions/answer";
 
 export const REMOVE_COST: number = 50;
 export const REVEAL_COST: number = 80;
@@ -54,9 +56,18 @@ export class HintModalPage extends CustomModal {
         return user.coins > cost;
     }
 
-    public removeLetter(user: UserState, cost: number = this.cost.remove): void {
-        this.doPurchase(user, cost) ?
-            this.store.dispatch(new UserWonAction(this.level.current)) : this.noop();
+    public hideLetter(user: UserState, cost: number = this.cost.remove): void {
+        const visibleKeyboard = getVisibleKeys(this.level.keyboard);
+        if (visibleKeyboard.length === 0) {
+            // dispatch error
+            console.log('CANNOT REMOVE ANYMORE');
+            return;
+        }
+
+        if (this.doPurchase(user, cost)) {
+            this.store.dispatch(new ResetAnswerAction());
+            this.store.dispatch(new HideCharacterAction());
+        }
     }
 
     public revealLetter(user: UserState, cost: number = this.cost.reveal): void {

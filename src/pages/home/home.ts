@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Observable, Subject } from "rxjs/Rx";
 import { Store } from "@ngrx/store";
 import { LevelState } from "../../reducer/levels";
-import { Character, SolutionSlot } from "../../reducer/answer";
+import { KeyboardCharacter, SolutionSlot } from "../../reducer/answer";
 import * as fromRoot from '../../reducer';
 import * as answer from '../../actions/answer';
 import * as user from '../../actions/user';
@@ -22,7 +22,7 @@ import { OpenSettingsAction } from "../../actions/user";
 })
 export class HomePage {
     public levels: Observable<LevelState>;
-    public answer: Observable<Character[]>;
+    public answer: Observable<KeyboardCharacter[]>;
     public user: Observable<UserState>;
     public onClickAdd$ = new Subject<any>();
 
@@ -78,12 +78,12 @@ export class HomePage {
         this.store.dispatch(new answer.TooManyCharacters())
     }
 
-    private addCharacter(character: Character): void {
+    private addCharacter(character: KeyboardCharacter): void {
         this.store.dispatch(new PlayClickAction());
         this.store.dispatch(new answer.AddCharacterAction(character));
     }
 
-    private checkAnswer(answer: string, slots: SolutionSlot[], character: Character, level: Level): void {
+    private checkAnswer(answer: string, slots: SolutionSlot[], character: KeyboardCharacter, level: Level): void {
         const entered = slots.map(item => item.entered.letter).join('') + character.letter;
 
         if(entered === answer) {

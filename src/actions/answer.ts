@@ -1,13 +1,13 @@
 import { Action } from "@ngrx/store";
 import {
-    Character, ADD_CHARACTER, RESET_ANSWER, REMOVE_CHARACTER, TOO_MANY_CHARACTERS_NOTIFICATION,
+    KeyboardCharacter, ADD_CHARACTER, RESET_ANSWER, REMOVE_CHARACTER, TOO_MANY_CHARACTERS_NOTIFICATION,
     CREATE_SLOTS, SolutionSlot
 } from "../reducer/answer";
 
 export class AddCharacterAction implements Action {
     readonly type = ADD_CHARACTER;
 
-    constructor(public payload: Character) { }
+    constructor(public payload: KeyboardCharacter) { }
 }
 
 export class RemoveCharacterAction implements Action {

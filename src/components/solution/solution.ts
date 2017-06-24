@@ -12,8 +12,8 @@ export class Solution {
 
   constructor() {}
 
-  public isCharacterSpace(character: string): boolean {
-    return character === ' ';
+  public isCharacterSpace(letter: string): boolean {
+    return letter === ' ';
   }
 
   public removeSlot(slot: SolutionSlot): void {

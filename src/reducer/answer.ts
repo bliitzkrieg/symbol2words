@@ -1,15 +1,17 @@
 import * as Answer from '../actions/answer';
 import { convertStringToArray } from "../app/utility";
 
-export interface Character {
+export interface KeyboardCharacter {
     letter: string;
     id: number;
+    hidden: boolean;
+    isAnswer: boolean;
 }
 
 export interface SolutionSlot {
     id: number;
     letter: string;
-    entered: Character
+    entered: KeyboardCharacter
 }
 
 export interface AnswerState {
@@ -17,7 +19,7 @@ export interface AnswerState {
     isFull: boolean;
 }
 
-const addCharacterToSlot = (character: Character, slots: SolutionSlot[]): SolutionSlot[] => {
+const addCharacterToSlot = (character: KeyboardCharacter, slots: SolutionSlot[]): SolutionSlot[] => {
     let added = false;
     return slots.map((slot: SolutionSlot) => {
 

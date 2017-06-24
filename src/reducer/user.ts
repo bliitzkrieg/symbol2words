@@ -14,7 +14,7 @@ export const EMAIL_SUPPORT = 'EMAIL_SUPPORT';
 export const USER_PURCHASE = 'USER_PURCHASE';
 
 const defaultState: UserState = {
-    coins: 100,
+    coins: 5000,
     isMuted: false
 };
 

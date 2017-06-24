@@ -1,29 +1,61 @@
 import levels from "../app/levels";
 import { Level, Levels } from "../app/levels";
-import { Character } from "./answer";
+import { KeyboardCharacter } from "./answer";
 import { convertStringToArray, MAX_CHARACTERS, buildRandomCharacters, shuffleArray } from "../app/utility";
 import * as LevelsActions from '../actions/levels';
 
 export interface LevelState {
     levels: Levels,
     current: Level,
-    keyboard: Character[]
+    keyboard: KeyboardCharacter[]
 }
 
 export const INCREMENT_LEVEL = 'INCREMENT_LEVEL';
 export const SHUFFLE_KEYBOARD = 'SHUFFLE_KEYBOARD';
+export const HIDE_LETTER = 'HIDE_LETTER';
 
-const buildKeyboard = (answer: string) => {
-    const characters = convertStringToArray(answer)
-        .filter(char => char != ' ');
-    const extras = buildRandomCharacters(MAX_CHARACTERS - characters.length);
+export const getVisibleKeys = (keyboard: KeyboardCharacter[]): KeyboardCharacter[] => {
+    return keyboard.filter(character => !character.hidden && !character.isAnswer);
+};
 
-    return shuffleArray([...characters, ...convertStringToArray(extras)]).map((letter, index) => {
+const buildKeyboard = (answer: string): KeyboardCharacter[] => {
+    const answerCharacters = convertStringToArray(answer)
+        .filter(letter => letter != ' ')
+        .map(letter => {
+           return {
+               letter,
+               isAnswer: true
+           };
+        });
+
+    const extraString = buildRandomCharacters(MAX_CHARACTERS - answerCharacters.length);
+    const extras = convertStringToArray(extraString)
+        .map(letter => {
+            return {
+                letter,
+                isAnswer: false
+            };
+        });
+
+    return shuffleArray([...answerCharacters, ...extras]).map(({ letter, isAnswer }, index) => {
         return {
+            id: index,
+            hidden: false,
             letter,
-            id: index
+            isAnswer
         };
     });
+};
+
+const hideRandomCharacter = (keyboard: KeyboardCharacter[]): KeyboardCharacter[] => {
+    const visibleKeyboard = getVisibleKeys(keyboard);
+
+    if (visibleKeyboard.length === 0) {
+        return keyboard;
+    }
+
+    const randomCharacter = visibleKeyboard[Math.floor(Math.random() * visibleKeyboard.length)];
+    return keyboard.map(character => character.id === randomCharacter.id ? {...character, hidden: true } : character);
 };
 
 const defaultState: LevelState = {
@@ -46,6 +78,11 @@ export function levelReducer(state = defaultState, action: LevelsActions.Actions
             return {
                 ...state,
                 keyboard: shuffleArray(state.keyboard)
+            };
+        case HIDE_LETTER:
+            return {
+                ...state,
+                keyboard: hideRandomCharacter(state.keyboard)
             };
         default:
             return state;

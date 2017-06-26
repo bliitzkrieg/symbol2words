@@ -3,8 +3,8 @@
         Try Again!
     </div>
     <div class="solution-block" *ngFor="let slot of slots" [class.solution-block--space]="isCharacterSpace(slot.letter)">
-        <div class="solution-block--entry" *ngIf="slot.entered" (click)="removeSlot(slot)">
-            {{ slot.entered.letter }}
+        <div class="solution-block--entry" *ngIf="slot.entered || slot.isRevealed" (click)="removeSlot(slot)">
+            {{ slot.entered?.letter || slot.letter }}
         </div>
     </div>
 </div>

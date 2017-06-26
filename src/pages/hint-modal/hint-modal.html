@@ -3,7 +3,7 @@
 
     <ion-list no-border>
 
-        <ion-item tappable (tap)="hideLetter(user)">
+        <ion-item tappable (tap)="hideLetter(user)" [class.hint--disabled]="!hasVisibleKeys">
             <ion-label>
                 Remove a letter
             </ion-label>

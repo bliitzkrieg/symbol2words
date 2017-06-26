@@ -13,6 +13,9 @@ export interface LevelState {
 export const INCREMENT_LEVEL = 'INCREMENT_LEVEL';
 export const SHUFFLE_KEYBOARD = 'SHUFFLE_KEYBOARD';
 export const HIDE_LETTER = 'HIDE_LETTER';
+export const RESET_GAME = 'RESET_GAME';
+export const GAME_RESET = 'GAME_RESET';
+export const RESET_GAME_PROMPT = 'RESET_GAME_PROMPT';
 
 export const getVisibleKeys = (keyboard: KeyboardCharacter[]): KeyboardCharacter[] => {
     return keyboard.filter(character => !character.hidden && !character.isAnswer);
@@ -84,6 +87,8 @@ export function levelReducer(state = defaultState, action: LevelsActions.Actions
                 ...state,
                 keyboard: hideRandomCharacter(state.keyboard)
             };
+        case RESET_GAME:
+            return defaultState;
         default:
             return state;
     }

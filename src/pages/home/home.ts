@@ -5,8 +5,6 @@ import { LevelState } from "../../reducer/levels";
 import { KeyboardCharacter, SolutionSlot } from "../../reducer/answer";
 import * as fromRoot from '../../reducer';
 import * as answer from '../../actions/answer';
-import * as user from '../../actions/user';
-import * as levelActions from '../../actions/levels';
 import { Level } from "../../app/levels";
 import { UserState } from "../../reducer/user";
 import { IncrementLevelAction } from "../../actions/levels";
@@ -15,6 +13,11 @@ import { CreateSlots } from "../../actions/answer";
 import { PlayClickAction, PlayErrorAction, PlayMenuAction } from "../../actions/sounds";
 import { OpenHintsAction } from "../../actions/user";
 import { OpenSettingsAction } from "../../actions/user";
+import { UserWonAction } from "../../actions/user";
+import { AddCharacterAction } from "../../actions/answer";
+import { TooManyCharacters } from "../../actions/answer";
+import { ShuffleKeyboardAction } from "../../actions/levels";
+import { RemoveCharacterAction } from "../../actions/answer";
 
 @Component({
     selector: 'page-home',
@@ -35,8 +38,7 @@ export class HomePage {
             .withLatestFrom(store)
             .subscribe(([data, state]) => {
                 const answerWithoutSpaces = state.levels.current.answer.replace(/\s/g, '');
-                const slotsAnswer = state.answer.slots.filter(item => item.entered);
-
+                const slotsAnswer = state.answer.slots.filter(item => item.entered || item.isRevealed);
                 answerWithoutSpaces.length === slotsAnswer.length ?
                     this.TooManyCharacters() : this.addCharacter(data.character);
 
@@ -51,7 +53,7 @@ export class HomePage {
 
     public removeCharacterFromAnswer(slot: SolutionSlot): void {
         this.store.dispatch(new PlayClickAction());
-        this.store.dispatch(new answer.RemoveCharacterAction(slot));
+        this.store.dispatch(new RemoveCharacterAction(slot));
     }
 
     public openHints(): void {
@@ -70,24 +72,32 @@ export class HomePage {
 
     public shuffleKeyboard(): void {
         this.store.dispatch(new PlayMenuAction());
-        this.store.dispatch(new levelActions.ShuffleKeyboardAction());
+        this.store.dispatch(new ShuffleKeyboardAction());
     }
 
     private TooManyCharacters(): void {
         this.store.dispatch(new PlayErrorAction());
-        this.store.dispatch(new answer.TooManyCharacters())
+        this.store.dispatch(new TooManyCharacters())
     }
 
     private addCharacter(character: KeyboardCharacter): void {
         this.store.dispatch(new PlayClickAction());
-        this.store.dispatch(new answer.AddCharacterAction(character));
+        this.store.dispatch(new AddCharacterAction(character));
     }
 
     private checkAnswer(answer: string, slots: SolutionSlot[], character: KeyboardCharacter, level: Level): void {
-        const entered = slots.map(item => item.entered.letter).join('') + character.letter;
+        const entered = slots.map(slot => {
+                if (slot.entered) {
+                    return slot.entered.letter;
+                }
+
+                if (slot.isRevealed) {
+                    return slot.letter;
+                }
+            }).join('') + character.letter;
 
         if(entered === answer) {
-            this.store.dispatch(new user.UserWonAction(level));
+            this.store.dispatch(new UserWonAction(level));
 
             setTimeout(() => {
                 this.store.dispatch(new ResetAnswerAction());

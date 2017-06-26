@@ -8,4 +8,9 @@ page-hint-modal {
   .ion-note-insufficient-diamonds {
     color: #ff5a2e !important;
   }
+
+  .hint--disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
 }

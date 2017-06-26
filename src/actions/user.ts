@@ -1,6 +1,6 @@
 import { Action } from "@ngrx/store";
 import {
-    USER_WON, TOGGLE_MUTE, OPEN_SETTINGS, OPEN_HINTS, RESET_GAME_PROMPT, EMAIL_SUPPORT,
+    USER_WON, TOGGLE_MUTE, OPEN_SETTINGS, OPEN_HINTS, EMAIL_SUPPORT,
     USER_PURCHASE
 } from "../reducer/user";
 import { Level } from "../app/levels";
@@ -23,10 +23,6 @@ export class OpenHintsAction implements Action {
     readonly type = OPEN_HINTS;
 }
 
-export class ResetGamePromptAction implements Action {
-    readonly type = RESET_GAME_PROMPT;
-}
-
 export class EmailSupportAction implements Action {
     readonly type = EMAIL_SUPPORT;
 }
@@ -42,6 +38,5 @@ export type Actions =
     ToggleMuteAction |
     OpenSettingsAction |
     OpenHintsAction |
-    ResetGamePromptAction |
     EmailSupportAction |
     PurchaseAction;

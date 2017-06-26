@@ -12,11 +12,12 @@ export interface SolutionSlot {
     id: number;
     letter: string;
     entered: KeyboardCharacter
+    isRevealed: boolean;
 }
 
 export interface AnswerState {
     slots: SolutionSlot[],
-    isFull: boolean;
+    isFull: boolean
 }
 
 const addCharacterToSlot = (character: KeyboardCharacter, slots: SolutionSlot[]): SolutionSlot[] => {
@@ -25,7 +26,7 @@ const addCharacterToSlot = (character: KeyboardCharacter, slots: SolutionSlot[])
 
         if (added || slot.letter === ' ') return slot;
 
-        if (!slot.entered) {
+        if (!slot.entered && !slot.isRevealed) {
             added = true;
             return {
                 ...slot,
@@ -35,6 +36,15 @@ const addCharacterToSlot = (character: KeyboardCharacter, slots: SolutionSlot[])
 
         return slot;
     });
+};
+
+const revealRandomSlot = (slots: SolutionSlot[]): SolutionSlot[] => {
+    const available = slots
+        .filter(slot => !slot.isRevealed)
+        .filter(slot => slot.letter !== ' ');
+    const randomSlot = available[Math.floor(Math.random() * available.length)];
+
+    return slots.map(slot => slot.id === randomSlot.id ? {...slot, isRevealed: true } : slot);
 };
 
 const removeSlotById = (slot: SolutionSlot, removing: SolutionSlot): any => {
@@ -49,6 +59,7 @@ export const REMOVE_CHARACTER = 'REMOVE_CHARACTER';
 export const RESET_ANSWER = 'RESET_ANSWER';
 export const TOO_MANY_CHARACTERS_NOTIFICATION = 'TOO_MANY_CHARACTERS_NOTIFICATION';
 export const CREATE_SLOTS = 'CREATE_SLOTS';
+export const REVEAL_SLOT = 'REVEAL_SLOT';
 
 const defaultState: AnswerState = {
     slots: [],
@@ -77,12 +88,17 @@ export function answerReducer(state = defaultState, action: Answer.Actions) {
             return {
                 ...state,
                 slots: convertStringToArray(action.payload)
-                        .map((item, index) => { return { id: index, letter: item, entered: undefined }})
+                        .map((item, index) => { return { id: index, letter: item, entered: undefined, isRevealed: false }})
             };
         case RESET_ANSWER:
             return {
                 ...state,
                 slots: state.slots.map(slot => { return {...slot, entered: undefined }})
+            };
+        case REVEAL_SLOT:
+            return {
+                ...state,
+                slots: revealRandomSlot(state.slots)
             };
         default:
             return state;

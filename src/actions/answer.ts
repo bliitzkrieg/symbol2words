@@ -1,7 +1,7 @@
 import { Action } from "@ngrx/store";
 import {
     KeyboardCharacter, ADD_CHARACTER, RESET_ANSWER, REMOVE_CHARACTER, TOO_MANY_CHARACTERS_NOTIFICATION,
-    CREATE_SLOTS, SolutionSlot
+    CREATE_SLOTS, SolutionSlot, REVEAL_SLOT
 } from "../reducer/answer";
 
 export class AddCharacterAction implements Action {
@@ -30,9 +30,14 @@ export class ResetAnswerAction implements Action {
     readonly type = RESET_ANSWER;
 }
 
+export class RevealCharacterAction implements Action {
+    readonly type = REVEAL_SLOT;
+}
+
 export type Actions =
     AddCharacterAction |
     ResetAnswerAction |
     RemoveCharacterAction |
     TooManyCharacters |
-    CreateSlots
+    CreateSlots |
+    RevealCharacterAction;

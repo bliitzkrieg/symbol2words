@@ -9,7 +9,7 @@ import * as fromRoot from '../../reducer';
 import { UserWonAction, PurchaseAction } from "../../actions/user";
 import { LevelState, getVisibleKeys } from "../../reducer/levels";
 import { HideCharacterAction } from "../../actions/levels";
-import { ResetAnswerAction } from "../../actions/answer";
+import { ResetAnswerAction, RevealCharacterAction } from "../../actions/answer";
 
 export const REMOVE_COST: number = 50;
 export const REVEAL_COST: number = 80;
@@ -52,32 +52,39 @@ export class HintModalPage extends CustomModal {
         this.level$.subscribe(level => this.level = level);
     }
 
+    public get hasVisibleKeys(): boolean {
+        return getVisibleKeys(this.level.keyboard).length > 0;
+    }
+
     public userHasFunds(cost: number, user: UserState): boolean {
         return user.coins > cost;
     }
 
     public hideLetter(user: UserState, cost: number = this.cost.remove): void {
-        const visibleKeyboard = getVisibleKeys(this.level.keyboard);
-        if (visibleKeyboard.length === 0) {
-            // dispatch error
-            console.log('CANNOT REMOVE ANYMORE');
+        if (!this.hasVisibleKeys) {
             return;
         }
 
         if (this.doPurchase(user, cost)) {
             this.store.dispatch(new ResetAnswerAction());
             this.store.dispatch(new HideCharacterAction());
+            this.viewCtrl.dismiss();
         }
     }
 
     public revealLetter(user: UserState, cost: number = this.cost.reveal): void {
-        this.doPurchase(user, cost) ?
-            this.store.dispatch(new UserWonAction(this.level.current)) : this.noop();
+        if (this.doPurchase(user, cost)) {
+            this.store.dispatch(new ResetAnswerAction());
+            this.store.dispatch(new RevealCharacterAction());
+            this.viewCtrl.dismiss();
+        }
     }
 
     public skipLevel(user: UserState, cost: number = this.cost.skip): void {
-        this.doPurchase(user, cost) ?
-            this.store.dispatch(new UserWonAction(this.level.current)) : this.noop();
+        if (this.doPurchase(user, cost)) {
+            this.viewCtrl.dismiss();
+            this.store.dispatch(new UserWonAction(this.level.current));
+        }
     }
 
     public dismiss(): void {
@@ -94,6 +101,4 @@ export class HintModalPage extends CustomModal {
         this.store.dispatch(new PurchaseAction(cost));
         return true;
     }
-
-    private noop = () => {};
 }

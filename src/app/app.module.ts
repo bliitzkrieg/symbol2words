@@ -24,6 +24,7 @@ import { SettingsModalPageModule } from "../pages/settings-modal/settings-modal.
 import { HintModalPageModule } from "../pages/hint-modal/hint-modal.module";
 import { EmailEffects } from "../effects/email";
 import { InAppBrowser } from "@ionic-native/in-app-browser";
+import { AlertEffects } from "../effects/alert";
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { InAppBrowser } from "@ionic-native/in-app-browser";
     EffectsModule.run(WonEffects),
     EffectsModule.run(SoundEffects),
     EffectsModule.run(ModalEffects),
-    EffectsModule.run(EmailEffects)
+    EffectsModule.run(EmailEffects),
+    EffectsModule.run(AlertEffects)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

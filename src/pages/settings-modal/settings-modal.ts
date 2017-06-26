@@ -4,9 +4,10 @@ import { CustomModal } from "../../misc/custom-modal";
 import { Store } from "@ngrx/store";
 import * as fromRoot from '../../reducer';
 import { PlayMenuAction } from "../../actions/sounds";
-import { ResetGamePromptAction, EmailSupportAction, ToggleMuteAction } from "../../actions/user";
+import { EmailSupportAction, ToggleMuteAction } from "../../actions/user";
 import { UserState } from "../../reducer/user";
 import { Observable } from "rxjs/Rx";
+import { ResetGamePromptAction } from "../../actions/levels";
 
 @IonicPage()
 @Component({

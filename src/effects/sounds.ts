@@ -23,6 +23,10 @@ export class SoundEffects {
         src: ['./assets/audio/Single_wav/UI_single_11.wav']
     });
 
+    private purchase = new Howl({
+        src: ['./assets/audio/Single_wav/UI_single_19.wav']
+    });
+
     constructor(private actions$: Actions, private vibration: Vibration, private store: Store<fromRoot.State>) { }
 
     @Effect()
@@ -44,7 +48,7 @@ export class SoundEffects {
                     this.menu.play();
                     break;
                 case PLAY_PURCHASE:
-
+                    this.purchase.play();
                     break;
                 default:
                     return empty();

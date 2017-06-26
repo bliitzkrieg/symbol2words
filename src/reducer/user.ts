@@ -9,7 +9,6 @@ export const USER_WON = 'USER_WON';
 export const TOGGLE_MUTE = 'TOGGLE_MUTE';
 export const OPEN_HINTS = 'OPEN_HINTS';
 export const OPEN_SETTINGS = 'OPEN_SETTINGS';
-export const RESET_GAME_PROMPT = 'RESET_GAME_PROMPT';
 export const EMAIL_SUPPORT = 'EMAIL_SUPPORT';
 export const USER_PURCHASE = 'USER_PURCHASE';
 

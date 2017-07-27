@@ -1,15 +1,15 @@
 import { Component, Renderer2 } from '@angular/core';
 import { IonicPage, ViewController } from 'ionic-angular';
-import { CustomModal } from "../../misc/custom-modal";
-import { PlayMenuAction, PlayPurchaseAction } from "../../actions/sounds";
-import { Store } from "@ngrx/store";
-import { UserState } from "../../reducer/user";
-import { Observable } from "rxjs/Rx";
+import { CustomModal } from '../../misc/custom-modal';
+import { PlayMenuAction, PlayPurchaseAction } from '../../actions/sounds';
+import { Store } from '@ngrx/store';
+import { UserState } from '../../reducer/user';
+import { Observable } from 'rxjs/Rx';
 import * as fromRoot from '../../reducer';
-import { UserWonAction, PurchaseAction } from "../../actions/user";
-import { LevelState, getVisibleKeys } from "../../reducer/levels";
-import { HideCharacterAction } from "../../actions/levels";
-import { ResetAnswerAction, RevealCharacterAction } from "../../actions/answer";
+import { UserWonAction, PurchaseAction } from '../../actions/user';
+import { LevelState, getVisibleKeys } from '../../reducer/levels';
+import { HideCharacterAction } from '../../actions/levels';
+import { ResetAnswerAction, RevealCharacterAction, RevealCharacterFinishedAction } from '../../actions/answer';
 
 export const REMOVE_COST: number = 50;
 export const REVEAL_COST: number = 80;
@@ -24,7 +24,7 @@ interface HintCosts {
 @IonicPage()
 @Component({
     selector: 'page-hint-modal',
-    templateUrl: 'hint-modal.html',
+    templateUrl: 'hint-modal.html'
 })
 export class HintModalPage extends CustomModal {
 
@@ -76,6 +76,7 @@ export class HintModalPage extends CustomModal {
         if (this.doPurchase(user, cost)) {
             this.store.dispatch(new ResetAnswerAction());
             this.store.dispatch(new RevealCharacterAction());
+            this.store.dispatch(new RevealCharacterFinishedAction());
             this.viewCtrl.dismiss();
         }
     }

@@ -1,3 +1,18 @@
 <ion-content padding>
-  You Won!
+  <div class="won-modal">
+    <div class="won-complete">Level Complete!</div>
+    <div class="earned-container">
+      <div class="earned--text">You earned</div>
+      <div class="earned--diamonds">
+        <i class="fa fa-diamond" aria-hidden="true"></i>
+        <div>
+          25
+        </div>
+      </div>
+    </div>
+    <div class="earn-more-container">
+      <button ion-button color="secondary" tappable (tap)="earnMore()" class="earn-more-btn">Earn More Diamonds</button>
+    </div>
+    <button ion-button full tappable (tap)="dismiss()" class="next-level">Next Level</button>
+  </div>
 </ion-content>

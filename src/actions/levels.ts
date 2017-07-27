@@ -1,9 +1,8 @@
 import { Action } from "@ngrx/store";
 import {
     INCREMENT_LEVEL, SHUFFLE_KEYBOARD, HIDE_LETTER, RESET_GAME, GAME_RESET,
-    RESET_GAME_PROMPT
+    RESET_GAME_PROMPT, SET_LEVEL
 } from "../reducer/levels";
-import { ViewController } from "ionic-angular/index";
 
 export class IncrementLevelAction implements Action {
     readonly type = INCREMENT_LEVEL;
@@ -29,10 +28,17 @@ export class GameResetAction implements Action {
     readonly type = GAME_RESET;
 }
 
+export class SetLevelAction implements Action {
+    readonly type = SET_LEVEL;
+
+    constructor(public payload: number) { }
+}
+
 export type Actions =
     IncrementLevelAction |
     ShuffleKeyboardAction |
     HideCharacterAction |
     ResetGamePromptAction |
     ResetGameAction |
-    GameResetAction;
+    GameResetAction |
+    SetLevelAction;

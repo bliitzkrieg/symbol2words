@@ -8,7 +8,7 @@ level-badge {
   margin-top: 30px;
   right: 20px;
   height: 80px;
-  background: #4bf8b9;
+  background: $buttons;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   color: white;
@@ -16,7 +16,6 @@ level-badge {
   text-align: center;
   font-family: $main-font;
   z-index: 99999;
-  border: 1px solid #67ff9b;
   border-top: none;
 
   .level {

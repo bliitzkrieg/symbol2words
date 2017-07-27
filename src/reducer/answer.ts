@@ -60,6 +60,8 @@ export const RESET_ANSWER = 'RESET_ANSWER';
 export const TOO_MANY_CHARACTERS_NOTIFICATION = 'TOO_MANY_CHARACTERS_NOTIFICATION';
 export const CREATE_SLOTS = 'CREATE_SLOTS';
 export const REVEAL_SLOT = 'REVEAL_SLOT';
+export const REVEAL_SLOT_FINISHED = 'REVEAL_SLOT_FINISHED';
+export const REVEAL_SLOT_AT_INDEX = 'REVEAL_SLOT_AT_INDEX';
 
 const defaultState: AnswerState = {
     slots: [],
@@ -99,6 +101,11 @@ export function answerReducer(state = defaultState, action: Answer.Actions) {
             return {
                 ...state,
                 slots: revealRandomSlot(state.slots)
+            };
+        case REVEAL_SLOT_AT_INDEX:
+            return {
+                ...state,
+                slots: state.slots.map((slot, index) => index !== action.payload ? slot : { ...slot, isRevealed: true })
             };
         default:
             return state;

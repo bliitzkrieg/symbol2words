@@ -19,7 +19,7 @@ export class EmailEffects {
     email: Observable<Action> = this.actions$
         .ofType(EMAIL_SUPPORT)
         .map(toPayload)
-        .switchMap(payload => {
+        .switchMap(() => {
             this.platform.ready().then(() => {
                 const browser = this.iab.create(`mailto:${ email }`, '_system');
                 browser.show();

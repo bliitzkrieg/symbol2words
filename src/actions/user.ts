@@ -1,8 +1,8 @@
 import { Action } from "@ngrx/store";
 import {
     USER_WON, TOGGLE_MUTE, OPEN_SETTINGS, OPEN_HINTS, EMAIL_SUPPORT,
-    USER_PURCHASE
-} from "../reducer/user";
+    USER_PURCHASE, INITIALIZE_APP, SET_USER, UserState
+} from '../reducer/user';
 import { Level } from "../app/levels";
 
 export class UserWonAction implements Action {
@@ -33,10 +33,22 @@ export class PurchaseAction implements Action {
     constructor(public payload: number) { }
 }
 
+export class SetUserAction implements Action {
+    readonly type = SET_USER;
+
+    constructor(public payload: UserState) {}
+}
+
+export class InitializeAppAction implements Action {
+    readonly type = INITIALIZE_APP;
+}
+
 export type Actions =
     UserWonAction |
     ToggleMuteAction |
     OpenSettingsAction |
     OpenHintsAction |
     EmailSupportAction |
-    PurchaseAction;
+    PurchaseAction |
+    InitializeAppAction |
+    SetUserAction;

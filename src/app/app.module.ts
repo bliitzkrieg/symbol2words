@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { StoreModule } from '@ngrx/store';
 import { Vibration } from '@ionic-native/vibration';
 import { EffectsModule } from '@ngrx/effects';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -25,6 +26,10 @@ import { HintModalPageModule } from "../pages/hint-modal/hint-modal.module";
 import { EmailEffects } from "../effects/email";
 import { InAppBrowser } from "@ionic-native/in-app-browser";
 import { AlertEffects } from "../effects/alert";
+import { WinConditionEffects } from "../effects/winCondition";
+import { SetupEffects } from '../effects/setup';
+import { PersistEffects } from '../effects/persist';
+import { ResetEffects } from '../effects/reset';
 
 @NgModule({
   declarations: [
@@ -42,6 +47,7 @@ import { AlertEffects } from "../effects/alert";
       maxAge: 5
     }),
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     HeaderModule,
     KeyboardModule,
     SolutionModule,
@@ -52,11 +58,15 @@ import { AlertEffects } from "../effects/alert";
     HintModalPageModule,
 
     // Todo: Move effects to effect module
+    EffectsModule.run(SetupEffects),
+    EffectsModule.run(WinConditionEffects),
     EffectsModule.run(WonEffects),
     EffectsModule.run(SoundEffects),
     EffectsModule.run(ModalEffects),
     EffectsModule.run(EmailEffects),
-    EffectsModule.run(AlertEffects)
+    EffectsModule.run(AlertEffects),
+    EffectsModule.run(PersistEffects),
+    EffectsModule.run(ResetEffects)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

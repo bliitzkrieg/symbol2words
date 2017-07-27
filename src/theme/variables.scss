@@ -23,32 +23,35 @@ $font-path: "../assets/fonts";
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
-$main-font: 'Mogra';
+$main-font: 'Hammersmith One';
 
-$primary: #3bf3b0;
+$primary: #86a9e1;
+$buttons: #a1e0a5;
 
 $colors: (
   primary:    $primary,
-  secondary:  #32db64,
+  secondary:  $buttons,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222
 );
 
-$background: #cdf8e9;
+$background: #2ABDE8;
 $background-color: $primary;
 
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
-$button-ios-background-color: #88714e;
+$button-ios-background-color: $buttons;
+$button-ios-text-color: #fff;
 
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-$button-md-background-color: #88714e;
+$button-md-background-color: $buttons;
+$button-md-text-color: #fff;
 
 
 // App Windows Variables

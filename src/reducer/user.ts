@@ -11,9 +11,11 @@ export const OPEN_HINTS = 'OPEN_HINTS';
 export const OPEN_SETTINGS = 'OPEN_SETTINGS';
 export const EMAIL_SUPPORT = 'EMAIL_SUPPORT';
 export const USER_PURCHASE = 'USER_PURCHASE';
+export const INITIALIZE_APP = 'INITIALIZE_APP';
+export const SET_USER = 'SET_USER';
 
 const defaultState: UserState = {
-    coins: 5000,
+    coins: 100,
     isMuted: false
 };
 
@@ -33,6 +35,11 @@ export function userReducer(state = defaultState, action: User.Actions) {
             return {
                 ...state,
                 coins: state.coins - action.payload
+            };
+        case SET_USER:
+            return {
+                ...state,
+                ...action.payload
             };
         case OPEN_HINTS:
             return state;

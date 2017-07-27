@@ -1,8 +1,8 @@
 import { Action } from "@ngrx/store";
 import {
     KeyboardCharacter, ADD_CHARACTER, RESET_ANSWER, REMOVE_CHARACTER, TOO_MANY_CHARACTERS_NOTIFICATION,
-    CREATE_SLOTS, SolutionSlot, REVEAL_SLOT
-} from "../reducer/answer";
+    CREATE_SLOTS, SolutionSlot, REVEAL_SLOT, REVEAL_SLOT_FINISHED, REVEAL_SLOT_AT_INDEX
+} from '../reducer/answer';
 
 export class AddCharacterAction implements Action {
     readonly type = ADD_CHARACTER;
@@ -16,7 +16,7 @@ export class RemoveCharacterAction implements Action {
     constructor(public payload: SolutionSlot) { }
 }
 
-export class TooManyCharacters implements Action {
+export class TooManyCharactersAction implements Action {
     readonly type = TOO_MANY_CHARACTERS_NOTIFICATION;
 }
 
@@ -34,10 +34,22 @@ export class RevealCharacterAction implements Action {
     readonly type = REVEAL_SLOT;
 }
 
+export class RevealCharacterFinishedAction implements Action {
+    readonly type = REVEAL_SLOT_FINISHED;
+}
+
+export class RevealCharacterAtIndexAction implements Action {
+    readonly type = REVEAL_SLOT_AT_INDEX;
+
+    constructor(public payload: number) {}
+}
+
 export type Actions =
     AddCharacterAction |
     ResetAnswerAction |
     RemoveCharacterAction |
-    TooManyCharacters |
+    TooManyCharactersAction |
     CreateSlots |
-    RevealCharacterAction;
+    RevealCharacterAction |
+    RevealCharacterFinishedAction |
+    RevealCharacterAtIndexAction;

@@ -1,3 +1,5 @@
+@import "../assets/fonts/font-awesome/scss/font-awesome";
+
 // http://ionicframework.com/docs/v2/theming/
 
 // App Global Sass
@@ -19,8 +21,6 @@
   src: local('HammersmithOne-Regular'),
   url('../assets/fonts/HammersmithOne-Regular.ttf');
 }
-
-@import "../assets/fonts/font-awesome/scss/font-awesome";
 
 .modal--small {
   ion-content {

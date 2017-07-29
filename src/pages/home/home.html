@@ -6,7 +6,7 @@
 
     <div class="home-container">
         <div class="solution">
-            Stuff & Things
+            <puzzle [items]="(levels | async)?.current.puzzle"></puzzle>
             <div class="game-actions">
                 <button ion-button icon-only tappable (tap)="resetSolution()">
                     <ion-icon name="refresh"></ion-icon>

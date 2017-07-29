@@ -30,11 +30,13 @@ import { WinConditionEffects } from "../effects/winCondition";
 import { SetupEffects } from '../effects/setup';
 import { PersistEffects } from '../effects/persist';
 import { ResetEffects } from '../effects/reset';
+import { PuzzleComponent } from '../components/puzzle/puzzle';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    PuzzleComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { RESET_GAME } from '../reducer/levels';
 import * as fromRoot from '../reducer';
 import { CreateSlots } from '../actions/answer';
+import { PlayResetAction } from '../actions/sounds';
 
 @Injectable()
 export class ResetEffects {
@@ -15,6 +16,7 @@ export class ResetEffects {
         .ofType(RESET_GAME)
         .withLatestFrom(this.store)
         .switchMap(([ , state]) => [
+            new PlayResetAction(),
             new CreateSlots(state.levels.current.answer)
         ]);
 }

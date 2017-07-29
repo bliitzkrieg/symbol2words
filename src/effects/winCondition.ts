@@ -7,7 +7,7 @@ import * as fromRoot from '../reducer';
 import { ADD_CHARACTER, REVEAL_SLOT } from "../reducer/answer";
 import { TooManyCharactersAction } from "../actions/answer";
 import { UserWonAction } from "../actions/user";
-import { PlayErrorAction } from "../actions/sounds";
+import { PlayErrorAction, PlayWinAction } from '../actions/sounds';
 
 @Injectable()
 export class WinConditionEffects {
@@ -22,14 +22,17 @@ export class WinConditionEffects {
         .switchMap(([ , state]) => {
             const answer = state.levels.current.answer.replace(/\s/g, '');
             const input = state.answer.slots
-                .filter(slot => slot.entered || slot.isRevealed ? true : false)
+                .filter(slot => !!(slot.entered || slot.isRevealed))
                 .map(slot => slot.entered ? slot.entered.letter : slot.letter)
                 .join('');
 
             if (answer.length !== input.length) return empty();
 
             if (answer === input) {
-                return Observable.of(new UserWonAction(state.levels.current));
+                return [
+                    new UserWonAction(state.levels.current),
+                    new PlayWinAction()
+                ];
             }
 
             return [

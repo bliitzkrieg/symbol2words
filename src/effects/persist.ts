@@ -7,7 +7,7 @@ import { empty } from 'rxjs/observable/empty';
 import * as fromRoot from '../reducer';
 import { HIDE_LETTER, RESET_GAME } from '../reducer/levels';
 import { TOGGLE_MUTE } from '../reducer/user';
-import { REVEAL_SLOT_FINISHED } from '../reducer/answer';
+import { REVEAL_SLOT_FINISHED, SolutionSlot } from '../reducer/answer';
 
 @Injectable()
 export class PersistEffects {
@@ -34,7 +34,7 @@ export class PersistEffects {
                         coins: state.user.coins,
                         isMuted: state.user.isMuted,
                         hidden: state.levels.keyboard.filter(key => key.hidden).length + 1,
-                        revealed: state.answer.slots.filter(slot => slot.isRevealed).map((item, index) => index)
+                        revealed: this.getRevealed(state.answer.slots)
                     });
                     break;
                 case REVEAL_SLOT_FINISHED:
@@ -44,11 +44,13 @@ export class PersistEffects {
                         coins: state.user.coins,
                         isMuted: state.user.isMuted,
                         hidden: state.levels.keyboard.filter(key => key.hidden).length,
-                        revealed: state.answer.slots.filter(slot => slot.isRevealed).map(item => item.id)
+                        revealed: this.getRevealed(state.answer.slots)
                     });
                     break;
             }
 
             return empty();
         });
+
+    private getRevealed = (slots: SolutionSlot[]) => slots.filter(slot => slot.isRevealed).map(item => item.id);
 }

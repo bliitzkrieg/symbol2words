@@ -48,6 +48,10 @@ page-won-modal {
     color: white;
     i {
       color: #fdfd96;
+      animation: jingle;
+      animation-delay: 1000ms;
+      animation-duration: 1s;
+      transform-origin: bottom center;
     }
     div {
       margin-left: 10px;
@@ -109,5 +113,23 @@ page-won-modal {
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes jingle {
+  20% {
+    transform: rotate(15deg);
+  }
+  40%  {
+    transform: rotate(-10deg);
+  }
+  60% {
+    transform: rotate(5deg);
+  }
+  80% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }
